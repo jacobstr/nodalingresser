@@ -17,11 +17,10 @@ his clever approach is:
   allow https, and manage DNS records on the fly as your fungible nodes go in and out of existence.
 
 > Note: this guy doesn't edit firewall rules. My personal GKE cluster just
-> 443 open on the worker node pool.
+> 443 opened on the worker node pool.
 
 This isn't as robust as a proper load balancer with health checks to your
 various backends. DNS is dumb, and with multiple nodes, your clients may find
 themselves round-robining across unhealthy nodes that are being shut down.
 
-Caleb was using [Cloudflares
-DNS](https://github.com/calebdoxsey/kubernetes-cloudflare-sync), and I'm using CloudDNS for my purposes.
+The author of the orignal post was using [Cloudflares DNS](https://github.com/calebdoxsey/kubernetes-cloudflare-sync), and I'm using Google's CloudDNS for my purposes.
