@@ -47,3 +47,8 @@ Flags:
   --google-dns-record=GOOGLE-DNS-RECORD
                            Name of the record to modify.
 ```
+
+## Deploying
+
+See the [contrib](contrib) folder for sample manifests for both the
+nodalingresser and ingress-nginx.
