@@ -1,0 +1,26 @@
+---
+language: generic
+
+services:
+  - docker
+
+stages:
+  - name: build
+    if: branch != master
+  - name: build-and-push
+    if: branch == master
+
+jobs:
+  include:
+    - stage: build
+      script:
+        - export IMAGE=koobz/nodalingresser:${TRAVIS_COMMIT:0:8}
+        - docker build -t $IMAGE .
+    - stage: build-and-push
+      script:
+        - export IMAGE=koobz/nodalingresser:${TRAVIS_COMMIT:0:8}
+        - docker build -t $IMAGE .
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker push $IMAGE
+        - docker tag $IMAGE koobz/nodalingresser:latest
+        - docker push koobz/nodalingresser:latest
