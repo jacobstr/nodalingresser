@@ -17,10 +17,33 @@ his clever approach is:
   allow https, and manage DNS records on the fly as your fungible nodes go in and out of existence.
 
 > Note: this guy doesn't edit firewall rules. My personal GKE cluster just
-> 443 opened on the worker node pool.
+> has 443 open on the worker node pool.
 
 This isn't as robust as a proper load balancer with health checks to your
 various backends. DNS is dumb, and with multiple nodes, your clients may find
 themselves round-robining across unhealthy nodes that are being shut down.
 
 The author of the orignal post was using [Cloudflares DNS](https://github.com/calebdoxsey/kubernetes-cloudflare-sync), and I'm using Google's CloudDNS for my purposes.
+
+## Usage
+
+```
+usage: nodalingresser [<flags>]
+
+Automatically updates Google CloudDNS A Records for GKE Nodes.
+
+Flags:
+  --help                   Show context-sensitive help (also try --help-long and --help-man).
+  --kubeconfig=KUBECONFIG  Path to kubeconfig file. Leave unset to use in-cluster config.
+  --debug                  Enable debug logging.
+  --client-go-verbosity=CLIENT-GO-VERBOSITY
+                           Set client go verbosity level.
+  --google-dns-service-account=GOOGLE-DNS-SERVICE-ACCOUNT
+                           Path to service account json file with CloudDNS permissions.
+  --google-dns-project=GOOGLE-DNS-PROJECT
+                           Name of the project to modify records in.
+  --google-dns-zone=GOOGLE-DNS-ZONE
+                           Name of the zone to modify records in.
+  --google-dns-record=GOOGLE-DNS-RECORD
+                           Name of the record to modify.
+```
