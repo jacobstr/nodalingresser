@@ -117,6 +117,8 @@ func withGoogleUpdater(sa string, project string, zone string, record string, lo
 
 	if record == "" {
 		return nil, errors.New("a google-dns-record is required when using google DNS")
+	} else if record[len(record)-1:] != "." {
+		return nil, errors.New("the google-dns-zone must be fully-qualified (ends with a period)")
 	}
 
 	return dns_google.NewCloudDNSUpdater(sa, project, zone, record, dns_google.WithLogger(logger))
