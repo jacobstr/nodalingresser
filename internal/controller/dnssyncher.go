@@ -63,7 +63,7 @@ func (d *dnsSyncher) resync() {
 
 	for _, node := range nodes {
 		for _, addr := range node.Status.Addresses {
-			if addr.Type == core_v1.NodeInternalIP {
+			if addr.Type == core_v1.NodeExternalIP {
 				ips = append(ips, addr.Address)
 			}
 		}
