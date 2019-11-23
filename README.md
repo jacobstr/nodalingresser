@@ -51,4 +51,12 @@ Flags:
 ## Deploying
 
 See the [contrib](contrib) folder for sample manifests for both the
-nodalingresser and ingress-nginx.
+nodalingresser and ingress-nginx. The [sa.sh](contrib/sa.sh) script can
+be used as an example for how to generate a service account with the necessary
+credentials to allow nodalingresser to manage a DNS zone for you.
+
+I've configured it to manage a wildcard record in a zone dedicated to cluster.
+For each service I typically create a corresponding ingress such as:
+
+- tauhaus.k8s.example.com
+- crusher.k8s.example.com
